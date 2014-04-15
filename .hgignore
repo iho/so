@@ -4,3 +4,4 @@ syntax: glob
 *.sqlite3
 static
 media
+.idea
