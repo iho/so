@@ -1,0 +1,5 @@
+*.py[co]
+*.db
+*.sqlite3
+static
+media

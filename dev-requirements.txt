@@ -1,0 +1,4 @@
+-r requirements.txt
+Fabric==1.8
+django-debug-toolbar==1.0.1
+.

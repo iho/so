@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{%  block title %}
+{% endblock %}
+{%  block content %}
+
+    {% for object in object_list %}
+        <li> <h1><a href="{{ object.get_absolute_url }}"> {{ object.name }} </a> </h1></li>
+    {% empty %}
+        <li>{% trans "No objects yet." %}</li>
+    {% endfor %}
+
+{% endblock %}

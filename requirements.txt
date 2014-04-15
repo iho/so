@@ -1,0 +1,9 @@
+Django==1.6.2
+South==0.8.4
+crispy-forms-foundation==0.3.2
+django-allauth==0.16.1
+django-braces==1.4.0
+django-crispy-forms==1.4.0
+django-taggit==0.11.2
+ipdb==0.8
+django-imagekit==3.2.1

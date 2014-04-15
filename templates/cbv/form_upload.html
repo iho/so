@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{%  block title %}
+
+{% endblock %}
+{%  block content %}
+
+    {{  form.errors }}
+<form  enctype="multipart/form-data" action="" method="post" >
+{% csrf_token %}
+{#    {% crispy form form.helper %}#}
+{{ form.as_ul }}
+    <button class="primaryAction" type="submit">Subbmit</button>
+{% endblock %}

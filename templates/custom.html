@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+    {% block title  %}
+    Hello
+    {% endblock %}
+</title>
+
+<link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic&subset=cyrillic-ext,latin' rel='stylesheet' type='text/css'>
+<meta charset="utf-8" />
+<style type="text/css" media="screen">
+body {
+    font-family: 'Arimo', sans-serif;
+    height: 100%;
+    width: 100%;
+}
+
+h1 {
+    font: 32px Georgia, "Times New Roman";
+    position: relative; /* обязательно */
+    color: #0094D6;
+    margin: 10px 0;
+    padding: 0;
+}
+h1 b {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 23px;
+    background: #FFF;
+    overflow: hidden /* для проклятого IE6 */;
+    opacity: 0.63;
+    filter: alpha(opacity=63);
+    -moz-opacity: 0.63;
+}
+.header{
+    margin-left: 10%;
+    margin-right: 15%; 
+    float: top;
+    height: 10%;
+    color: #blue;
+    background-color: #black;
+}
+.right{
+    float: right;
+}
+.header ul{
+    height: 90%;
+    list-style: none;
+    padding: 0px;
+}
+.header li{
+    display: inline;
+}
+.header li a{
+    height: 54px;
+    padding: 20px;
+}
+.header li a:hover{
+    //    background: #775522;
+    color: #ff111e;
+    border-bottom: 3px solid #ff11ff;
+}
+.sidebar .content{
+    margin: 80px;
+}
+.sidebar{
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+.content{
+
+    margin-left: 10%;
+    width: 70%;
+    height: 100%;
+    float: left;
+}
+.sidebar ul{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    list-style: none;
+    margin-top: 10%;
+
+}
+.container{
+	height: 100%;
+}
+.sidebar li{
+    width: 100%;
+    padding-top: 5%;
+}
+
+.sidebar a{
+    display: block;
+}
+.footer{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 150px;
+    border-top: 5px solid #000000;
+    float: left;
+    margin-top: 10px;
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <ul>
+        <li><a href="#fsfsd">Anchor Text</a></li>
+        <li><a href="#fsfsd">Anchor Text</a></li>
+        <li><a href="#fsfsd">Anchor Text</a></li>
+        <li class="right"><a href="#fsfsd">Anchor Text</a></li>
+        <li class="right"><a href="#fsfsd">Привет</a></li>
+    </ul>
+</div>
+<div class="container">
+
+    <div class="content">
+        tet
+        <table border="0" cellspacing="5" cellpadding="5">
+
+   <caption>Таблица размеров обуви</caption>
+            <tr><th>Header</th></tr>
+            <tr><td>Data</td></tr>
+   <tr><td>34,5</td><td>3,5</td><td>36</td><td>23</td></tr>
+   <tr><td>34,5</td><td>3,5</td><td>36</td><td>23</td></tr>
+        </table>
+        <h1 >fsfsdfsf <b></b></h1>   
+    </div>
+    <div class="sidebar">
+        <ul>
+            <li><a href="#">ANALYTICS</a></li>
+            <li><a href="#">STYLES</a></li>
+            <li><a href="#">VOTERS</a></li>
+            <li><a href="#">GET STARTED</a></li>
+            <li><a href="#">UPDATE</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="footer">
+i am foooter    text 
+</div>
+
+<script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</body>
+</html>

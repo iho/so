@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{%  block title %}
+    {% trans "Detail " %} {{ object }}
+{% endblock %}
+{%  block content %}
+
+    <a href="{{ object.get_absolute_url }}">{{ object.username }}:{{ object.email }} </a>
+
+        {{ object.username }}
+
+{% endblock %}
