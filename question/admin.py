@@ -6,12 +6,15 @@ from django.contrib import admin
 
 from models import *
 
+
 class AdminTag(admin.ModelAdmin):
     fields = ['name', ]
+
+
 class AdminQuestion(admin.ModelAdmin):
     #fields = (('name', 'cat'), 'owner','raiting')
     date_hierarchy = 'created'
-    list_display = ['name', 'tags', 'owner']
+    list_display = ['name', 'tags_list', 'owner']
     ordering = ['updated']
     readonly_fields = ['raiting']
     preserve_filters = True

@@ -17,6 +17,8 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from managers import MyUserManager
 from taggit.managers import TaggableManager
+
+
 class Category(models.Model):
     name = models.CharField(max_length=80, unique=True)
     slug = models.SlugField(_('Slug'), max_length=60, unique=True)
@@ -116,13 +118,18 @@ class Question(models.Model):
     updated = models.DateTimeField(verbose_name=_('Updated'), auto_now=True)
     created = models.DateTimeField(verbose_name=_('Crated'), auto_now_add=True)
     owner = models.ForeignKey(User, verbose_name=_('Owner'))
-    raiting = models.PositiveIntegerField(_('Plus'), default=0)#, editable=False)
+    # , editable=False)
+    raiting = models.PositiveIntegerField(_('Plus'), default=0)
     voted = models.ManyToManyField(
         User, verbose_name=_('Voted'), related_name='voted_question', null=True, blank=True)
     cat = models.ForeignKey(
         Category, verbose_name=_('Category'), blank=True, null=True)
 
     views = models.PositiveIntegerField(_('Views'), default=0, editable=False)
+
+    def tags_list(self):
+        return ', '.join( tag.name for tag in  self.tags.all())
+    tags_list.short_description = 'Tags'
 
     def add_plus(self, user):
         if not user in self.voted.all():

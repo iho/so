@@ -17,6 +17,7 @@ from forms import *
 from taggit.models import Tag
 
 from .models import *
+from .views_mixin import AjaxableResponseMixin, FormMixin
 
 
 class TagListView(ListView):
@@ -70,7 +71,7 @@ class ProfileList(ListView):
     template_name = 'cbv/list.html'
 
 
-class CreateAnswer(LoginRequiredMixin, CreateView):
+class CreateAnswer(AjaxableResponseMixin, LoginRequiredMixin, CreateView):
     model = Answer
     form_class = AnswerForm
     template_name = 'cbv/form_upload.html'
@@ -93,32 +94,6 @@ class DeleteAnswer(DeleteView):
     model = Answer
     template_name = 'cbv/delete.html'
     success_url = '/'
-
-
-class AjaxableResponseMixin(object):
-
-    def render_to_json_response(self, context, **response_kwargs):
-        data = json.dumps(context)
-        response_kwargs['content_type'] = 'application/json'
-        return HttpResponse(data, **response_kwargs)
-
-    def form_invalid(self, form):
-        response = super(AjaxableResponseMixin, self).form_invalid(form)
-        if self.request.is_ajax():
-            return self.render_to_json_response(form.errors, status=400)
-        else:
-            return response
-
-    def form_valid(self, form):
-        response = super(AjaxableResponseMixin, self).form_valid(form)
-        if self.request.is_ajax():
-            data = {
-                'Result': 'Is OK!',
-                'Your pk is': self.object.pk,
-            }
-            return self.render_to_json_response(data)
-        else:
-            return response
 
 
 class UpdateProfile(AjaxableResponseMixin, UpdateView):
