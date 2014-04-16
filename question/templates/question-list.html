@@ -23,21 +23,7 @@
     </thead>
     <tbody>
     {% for object in object_list %}
-        <tr>
-            <td><a href="{% url "question" object.slug %}"> <b>{{ object.name }}</b> </a><br>
-            
-
-                by <a href="{% url "profile" object.owner.pk %}"> {{ object.owner.username }}</a>
-                at {{ object.created }}
-                {% for tag in   object.tags.all  %} 
-            <span class=" secondary   radius label">tag</span>
-
-                {% endfor %} 
-                 </td>
-            <td class="center"> <b>{{ object.views }}</b></td>
-            <td class="center"> <b>{{ object.raiting }}</b></td>
-            <td class="center"> <b>{{ object.answers.count }}</b></td>
-        </tr>
+        {% include "one_question.html" %}
     {% endfor %}
 
     </tbody>

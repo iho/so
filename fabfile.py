@@ -19,7 +19,7 @@ def init_migration():
 
 @task
 def dump():
-    local('rm question/fixtures/initial_data.json')
+   # local('rm question/fixtures/initial_data.json')
     local('python ./manage.py dumpdata >> question/fixtures/initial_data.json')
 
 

@@ -33,9 +33,11 @@
 
     <!-- Main Blog Content -->
     <div class="large-9 columns" role="content">
-    <span id="messages">
+
     
+    {% include "loginreg.html" %}
         {% if messages %}
+        <span id="messages">
             
                 
                     
@@ -49,9 +51,9 @@
 </div>
                 {% endfor %}
           
-            
+</span>            
         {% endif %}
-</span>
+
         {% block content %}
         {% endblock %}
 

@@ -46,8 +46,11 @@ class AllPagesMixin(object):
     def get_context_data(self, **kwargs):
         ctx = super(AllPagesMixin, self).get_context_data(**kwargs)
         ctx['qcats'] = Category.objects.annotate(
-            num_question=Count('question')).order_by('-num_question')[:90]
-
+            num_question=Count('question')).order_by('-num_question')[:15]
+        
+        ctx['current_page'] = getattr(self, '_name_page' , '')
+        
+        ctx['is_main'] = self.__class__.__name__ == "MainView" or False
         return ctx
 
 

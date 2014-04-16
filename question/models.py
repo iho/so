@@ -47,12 +47,16 @@ class User(AbstractBaseUser):
     yahoo = models.CharField('Yahoo', max_length=80, blank=True)
     location = models.CharField(_('Location'), max_length=30, blank=True)
     is_moderator = models.BooleanField(default=False)
-
+    created = models.DateTimeField(verbose_name=_('Crated'), auto_now_add=True)
+    
     views = models.PositiveIntegerField(_('Views'), default=0, editable=False)
 
     class Meta:
         verbose_name = _('Profile')
         verbose_name_plural = _('Profiles')
+        ordering = ['-created']
+        get_latest_by = 'created'
+        
 
     def get_absolute_url(self):
         return reverse("profile", args=[self.id])

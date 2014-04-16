@@ -23,11 +23,13 @@ from .views_mixin import (AjaxableResponseMixin, AllPagesMixin,
 
 
 class TagListView(ListView):
+    _name_page = 'List of tags'
     model = Tag
     template_name = 'cbv/list_tags.html'
 
 
 class TagDetailView(ListView):
+    _name_page = 'Question width tag'
     template_name = 'cbv/list_question_tags.html'
     paginate_by = 10
 
@@ -36,11 +38,13 @@ class TagDetailView(ListView):
 
 
 class CatListView(ListView):
+    _name_page = 'List of categories'
     model = Category
     template_name = 'cbv/list_cats.html'
 
 
 class CatDetailView(ListView):
+    _name_page = 'Question width categories'
     model = Category
     template_name = 'cbv/list_question_cats.html'
     paginate_by = 10
@@ -60,6 +64,7 @@ class MainView(ListView):
 
 
 class CreateQuestion(LoginRequiredMixin, CreateView):
+    _name_page = 'Create Question '
     model = Question
     form_class = QuestionForm
     template_name = 'cbv/form.html'
@@ -69,11 +74,13 @@ class CreateQuestion(LoginRequiredMixin, CreateView):
 
 
 class DetailQuestion(DetailView):
+    _name_page = 'Question detail'
     model = Question
     template_name = 'question.html'
 
 
 class ListQuestion(AllPagesMixin, ListView):
+    _name_page = 'List Of Question`s'
     paginate_by = 10
     template_name = 'question-list.html'
 
@@ -87,26 +94,29 @@ class ListQuestion(AllPagesMixin, ListView):
 
 
 class UpdateQuestion(StaffuserRequiredMixin, UpdateView):
+    _name_page = 'Update  Question '
     model = Question
     form_class = QuestionForm
     template_name = 'cbv/form.html'
 
 
-class DeleteQuestion(PermissionRequiredMixin, StaffuserRequiredMixin, DeleteView):
-    #permission_required = "auth.change_user"
+class DeleteQuestion( StaffuserRequiredMixin, DeleteView):
+    _name_page = 'Delete Question '
     model = Question
     template_name = 'cbv/delete.html'
     success_url = '/'
 
 
-class ProfileView(DetailView):
+class ProfileView(AllPagesMixin ,DetailView):
+    _name_page = 'Page of profile'
     model = User
-    template_name = 'cbv/detail.html'
+    template_name = 'profile_detail.html'
 
 
 class ProfileList(ListView):
+    _name_page = 'Profile`s list'
     model = User
-    template_name = 'cbv/list.html'
+    template_name = 'cbv/list_profiles.html'
 
 
 class CreateAnswer(AjaxableResponseMixin, LoginRequiredMixin, CreateView):

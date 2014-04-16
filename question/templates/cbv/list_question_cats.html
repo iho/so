@@ -16,31 +16,14 @@
     <thead>
         <tr>
             <th width="470">  </th>
-            
+            <th width="20">Views</th>
+            <th width="20">Raiting</th>
+            <th width="20">Answers</th>
         </tr>
     </thead>
     <tbody>
     {% for object in object_list %}
-
-        <tr>
-            <td>
-            <a href="{% url "question" object.slug %}"> <b>{{ object.name }}</b> </a><br>
-            
-
-                by <a href="{% url "profile" object.owner.pk %}"> {{ object.owner.username }}</a>
-                at {{ object.created }}
-                {% for tag in   object.tags.all  %} 
-            <span class=" secondary   radius label">tag</span>
-
-                {% endfor %} 
-                
-               
-            
-
-                
-                 </td>
-            
-        </tr>
+        {% include "one_question.html" %}
     {% endfor %}
 
     </tbody>
