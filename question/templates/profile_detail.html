@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{%  block title %}
+    {% trans "Detail " %} {{ object }}
+{% endblock %}
+{%  block content %}
+
+    {{ object.username }}</a> <br/>
+    
+        {{ object.get_avatar  }} :
+        
+{% endblock %}

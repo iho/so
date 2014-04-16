@@ -19,8 +19,7 @@ def init_migration():
 
 @task
 def dump():
-   # local('rm question/fixtures/initial_data.json')
-    local('python ./manage.py dumpdata >> question/fixtures/initial_data.json')
+    local('python ./manage.py dumpdata > question/fixtures/initial_data.json')
 
 
 @task
@@ -49,6 +48,14 @@ def push(comment=False):
     local('git commit -m "{}"'.format(comment), capture=False)
     local('git push', capture=False)
     green('All ok')
+
+@task
+def db_setup():
+    local(';\n'.join([
+        'python ./manage.py syncdb',
+        'python ./manage.py migrate',
+        'python ./manage.py createsuperuser',
+    ]))
 
 
 @task

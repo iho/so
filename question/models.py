@@ -39,7 +39,7 @@ class User(AbstractBaseUser):
     avatar_thumbnail = ImageSpecField(
         source='avatar', processors=[ResizeToFill(200, 200)], format='JPEG', options={'quality': 60})
     use_avatar = models.BooleanField(default=True)
-    username = models.CharField(max_length=80, default="Unnamed", blank=True)
+    username = models.CharField(max_length=80, default="Unnamed", blank=True, help_text='Email stores in lowercase')
     jabber = models.CharField('Jabber', max_length=80, blank=True)
     icq = models.CharField('ICQ', max_length=12, blank=True)
     msn = models.CharField('MSN', max_length=80, blank=True)

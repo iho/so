@@ -68,13 +68,25 @@ MIDDLEWARE_CLASSES = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangodb',
-        'USER': 'djangouser',
+        'NAME': 'django_db',
+        'USER': 'django_user',
         'PASSWORD': 'qwerty',
         'HOST': 'localhost',
         'PORT': '5432',
     },
 }
+
+
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.SHA1PasswordHasher',
+    'django.contrib.auth.hashers.MD5PasswordHasher',
+    'django.contrib.auth.hashers.CryptPasswordHasher',
+)
+
 
 # python -m smtpd -n -c DebuggingServer localhost:1025
 # or sudo apt-get install postfix
@@ -164,9 +176,10 @@ SOCIALACCOUNT_PROVIDERS = \
 AUTH_USER_MODEL = 'question.User'
 
 
-if getpass.getuser() == 'engarde':
-    DEBUG = False
+if getpass.getuser() != 'engarde':
+    DEBUG = True
 else:
+    
     from local_settings import *
 
 
