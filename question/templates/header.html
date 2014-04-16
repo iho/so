@@ -53,10 +53,8 @@
 </nav>
 
 <nav class="breadcrumbs">
-  <a href="#">Home</a>
-  <a href="#">Features</a>
-  <a class="unavailable" href="#">Gene Splicing</a>
-  <a class="current" href="#">Cloning</a>
+  <a href="{% url "main" %}">Home</a>
+  <a class="current" href="#">{{ current_page }}</a>
 </nav>
 
         <hr>

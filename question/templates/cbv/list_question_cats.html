@@ -1,0 +1,71 @@
+﻿{% extends 'base.html' %}
+{% load i18n %}
+{%  block title %}
+{% endblock %}
+{%  block content %}
+
+
+
+
+{% if not object_list %}
+    <li>{% trans "No objects yet." %}</li>
+{% else %}
+
+
+<table>
+    <thead>
+        <tr>
+            <th width="470">  </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+    {% for object in object_list %}
+
+        <tr>
+            <td>
+            <a href="{% url "question" object.slug %}"> <b>{{ object.name }}</b> </a><br>
+            
+
+                by <a href="{% url "profile" object.owner.pk %}"> {{ object.owner.username }}</a>
+                at {{ object.created }}
+                {% for tag in   object.tags.all  %} 
+            <span class=" secondary   radius label">tag</span>
+
+                {% endfor %} 
+                
+               
+            
+
+                
+                 </td>
+            
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+{% if page_obj.paginator.num_pages > 1 %}
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li class="arrow available"><a href="{% url "cat" current_slug %}?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+            <li class="arrow unavailable"><a href="{% url "cat" current_slug %}?page=1">&laquo;</li>
+                {% endif %}
+                {% for page_number in ' '|ljust:page_obj.paginator.num_pages %}
+                     <li {% if page_obj.number == forloop.counter %} class="current" {% endif %}><a href="{% url "cat" current_slug %}?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+                {% endfor %}
+            
+            
+
+            {% if page_obj.has_next  %}
+                <li class="arrow available"><a href="{% url "cat" current_slug %}?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="arrow unavailable"><a href="{% url "cat" current_slug %}?page={{ page_obj.paginator.num_pages }}">&raquo;</li>
+            {% endif %}
+        {% endif %}
+    </ul>
+{% endif %}
+
+    
+{% endblock %}

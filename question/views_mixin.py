@@ -2,7 +2,13 @@
 # coding: utf-8
 from __future__ import division, print_function, unicode_literals
 
+from django.contrib import messages
+from django.http import Http404
+from django.shortcuts import redirect
+
 from future_builtins import ascii, filter, hex, map, oct, zip
+
+from .models import Category
 
 
 class AjaxableResponseMixin(object):
@@ -34,17 +40,20 @@ class AjaxableResponseMixin(object):
             return response
 
 
-class FormMixin(object):
+class AllPagesMixin(object):
 
     def get_context_data(self, **kwargs):
-        ctx = super(FormMixin, self).get_context_data(**kwargs)
-        ctx['house'] = self.get_house()
+        ctx = super(AllPagesMixin, self).get_context_data(**kwargs)
+        ctx['qcats'] = Category.objects.all()
         return ctx
 
 
-class C(object):
-    _exm = []
+class OwnerStaffRequiredMixin(object):
 
-    def __init__(self):
-        C._exm.append(self)
-a = C()
+    def get_object(self, queryset=None):
+        obj = super(OwnerStaffRequiredMixin, self).get_object()
+        if (obj.owner_id == self.request.user.pk) or (self.request.user.is_staff):
+            messages.success(self.request, 'Done!')
+            return obj
+        messages.warning(self.request, 'You have not permission to this object.')
+        raise Http404

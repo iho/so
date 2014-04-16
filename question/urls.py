@@ -30,5 +30,16 @@ urlpatterns = patterns('',
                            UpdateAnswer.as_view(), name='answer_edit'),
                        url(r'^answer/add$', CreateAnswer.as_view(),
                            name='answer_add'),
-                       url(r'^$', MainView.as_view(), name="main")
+                       url(r'^$', MainView.as_view(), name="main"),
+
+                       url(r'^tags$', TagListView.as_view(),
+                           name='tags'),
+                       url(r'^tag/(?P<slug>[-a-zA-Z0-9_]+)/$',
+                           TagDetailView.as_view(), name='tag'),
+
+                       url(r'^cats$', CatListView.as_view(),
+                           name='cats'),
+                       url(r'^cat/(?P<slug>[-a-zA-Z0-9_]+)/$',
+                           CatDetailView.as_view(), name='cat'),
+
                        )

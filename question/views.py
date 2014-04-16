@@ -12,16 +12,46 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic import (CreateView, DeleteView, DetailView, FormView,
                                   ListView, TemplateView, UpdateView)
 
-from braces.views import LoginRequiredMixin
+from braces.views import (LoginRequiredMixin, PermissionRequiredMixin,
+                          StaffuserRequiredMixin)
 from forms import *
 from taggit.models import Tag
 
 from .models import *
-from .views_mixin import AjaxableResponseMixin, FormMixin
+from .views_mixin import (AjaxableResponseMixin, AllPagesMixin,
+                          OwnerStaffRequiredMixin)
 
 
 class TagListView(ListView):
     model = Tag
+    template_name = 'cbv/list_tags.html'
+
+
+class TagDetailView(ListView):
+    template_name = 'cbv/list_question_tags.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Question.objects.filter(tags__slug__iexact=self.kwargs['slug']).select_related()
+
+
+class CatListView(ListView):
+    model = Category
+    template_name = 'cbv/list_cats.html'
+
+
+class CatDetailView(ListView):
+    model = Category
+    template_name = 'cbv/list_question_cats.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Question.objects.filter(cat__slug__iexact=self.kwargs['slug']).select_related()
+
+    def get_context_data(self, **kwargs):
+        ctx = super(CatDetailView, self).get_context_data(**kwargs)
+        ctx['current_slug'] = self.kwargs['slug']
+        return ctx
 
 
 class MainView(ListView):
@@ -40,22 +70,30 @@ class CreateQuestion(LoginRequiredMixin, CreateView):
 
 class DetailQuestion(DetailView):
     model = Question
-    template_name = 'cbv/detail.html'
+    template_name = 'question.html'
 
 
-class ListQuestion(ListView):
-    model = Question
+class ListQuestion(AllPagesMixin, ListView):
     paginate_by = 10
-    template_name = 'cbv/list.html'
+    template_name = 'question-list.html'
+
+    def get_queryset(self):
+        return Question.objects.all().select_related('owner').prefetch_related('tags')
+
+    def get_context_data(self, **kwargs):
+        ctx = super(ListQuestion, self).get_context_data(**kwargs)
+        ctx['current_page'] = 'List of question'
+        return ctx
 
 
-class UpdateQuestion(UpdateView):
+class UpdateQuestion(StaffuserRequiredMixin, UpdateView):
     model = Question
     form_class = QuestionForm
     template_name = 'cbv/form.html'
 
 
-class DeleteQuestion(DeleteView):
+class DeleteQuestion(PermissionRequiredMixin, StaffuserRequiredMixin, DeleteView):
+    #permission_required = "auth.change_user"
     model = Question
     template_name = 'cbv/delete.html'
     success_url = '/'
@@ -84,19 +122,20 @@ class CreateAnswer(AjaxableResponseMixin, LoginRequiredMixin, CreateView):
     #     form.instance.owner = self.request.user
 
 
-class UpdateAnswer(UpdateView):
+class UpdateAnswer(PermissionRequiredMixin, StaffuserRequiredMixin, UpdateView):
+    permission_required = "auth.change_user"
     model = Answer
     form_class = AnswerForm
     template_name = 'cbv/form.html'
 
 
-class DeleteAnswer(DeleteView):
+class DeleteAnswer(OwnerStaffRequiredMixin, DeleteView):
     model = Answer
     template_name = 'cbv/delete.html'
     success_url = '/'
 
 
-class UpdateProfile(AjaxableResponseMixin, UpdateView):
+class UpdateProfile(AjaxableResponseMixin, StaffuserRequiredMixin, UpdateView):
     model = User
     form_class = UserForm
     template_name = 'cbv/form_upload.html'
@@ -108,12 +147,12 @@ class UpdateProfile(AjaxableResponseMixin, UpdateView):
 @login_required
 def vote(request, pk=0):
     user = request.user
-    if request.GET.get('answer', 0) == 'minus':
-        get_object_or_404(Answer, pk=pk).add_minus(user)
-    elif request.GET.get('answer', 0) == 'plus':
-        get_object_or_404(Answer, pk=pk).add_plus(user)
-    elif request.GET.get('question', 0) == 'minus':
-        get_object_or_404(Question, pk=pk).add_minus(user)
-    elif request.GET.get('question', 0) == 'plus':
-        get_object_or_404(Question, pk=pk).add_plus(user)
-    return HttpResponse('Voted!')
+    get_object_or_404(Question, pk=pk).add_plus(user)
+    return HttpResponse('Voted')
+
+
+@login_required
+def vote_answer(request, pk=0):
+    user = request.user
+    get_object_or_404(Answer, pk=pk).add_plus(user)
+    return HttpResponse('Voted')

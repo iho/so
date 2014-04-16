@@ -24,12 +24,7 @@ class Category(models.Model):
     slug = models.SlugField(_('Slug'), max_length=60, unique=True)
 
     def get_absolute_url(self):
-        return reverse('category', args=[str(self.slug)])
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.slug = slugify(self.name)
-        super(Category, self).save(*args, **kwargs)
+        return reverse('cat', args=[str(self.slug)])
 
     class Meta:
         verbose_name = _('Category')
@@ -73,7 +68,7 @@ class User(AbstractBaseUser):
         self.email = self.email.lower()
 
     def __unicode__(self):
-        return _("{}'s profile").format(self.username)
+        return _("{}'s ").format(self.username)
 
     def views(self):
         raise NotImplementedError()
@@ -106,14 +101,14 @@ class User(AbstractBaseUser):
 
     @property
     def is_staff(self):
-        return self.is_admin
+        return self.is_moderator
 
 
 class Question(models.Model):
     tags = TaggableManager()
     name = models.CharField(_('Name'), max_length=60)
     slug = models.SlugField(
-        _('Slug'), max_length=60, editable=False)
+        _('Slug'), max_length=60)
     text = models.TextField(_('Question'))
     updated = models.DateTimeField(verbose_name=_('Updated'), auto_now=True)
     created = models.DateTimeField(verbose_name=_('Crated'), auto_now_add=True)
@@ -128,7 +123,7 @@ class Question(models.Model):
     views = models.PositiveIntegerField(_('Views'), default=0, editable=False)
 
     def tags_list(self):
-        return ', '.join( tag.name for tag in  self.tags.all())
+        return ', '.join(tag.name for tag in self.tags.all())
     tags_list.short_description = 'Tags'
 
     def add_plus(self, user):
