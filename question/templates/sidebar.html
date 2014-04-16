@@ -9,7 +9,7 @@
       
 
                 {% for cat  in qcats %}
-                <li><a href="#">{{ cat.name }}</a></li>
+                <li><a href="{% url "cat" cat.slug %}">{{ cat.name }} {{ cat.num_question }}</a></li>
                      
                 {% endfor %}
         

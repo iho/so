@@ -39,12 +39,13 @@ class AjaxableResponseMixin(object):
         else:
             return response
 
-
+from django.db.models import Avg, Count
 class AllPagesMixin(object):
 
     def get_context_data(self, **kwargs):
         ctx = super(AllPagesMixin, self).get_context_data(**kwargs)
-        ctx['qcats'] = Category.objects.all()
+        ctx['qcats'] = Category.objects.annotate(num_question=Count('question')).order_by('-num_question')[:90]
+
         return ctx
 
 
