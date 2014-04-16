@@ -3,6 +3,7 @@
 from __future__ import division, print_function, unicode_literals
 
 from django.contrib import messages
+from django.db.models import Avg, Count
 from django.http import Http404
 from django.shortcuts import redirect
 
@@ -39,12 +40,13 @@ class AjaxableResponseMixin(object):
         else:
             return response
 
-from django.db.models import Avg, Count
+
 class AllPagesMixin(object):
 
     def get_context_data(self, **kwargs):
         ctx = super(AllPagesMixin, self).get_context_data(**kwargs)
-        ctx['qcats'] = Category.objects.annotate(num_question=Count('question')).order_by('-num_question')[:90]
+        ctx['qcats'] = Category.objects.annotate(
+            num_question=Count('question')).order_by('-num_question')[:90]
 
         return ctx
 
@@ -56,5 +58,6 @@ class OwnerStaffRequiredMixin(object):
         if (obj.owner_id == self.request.user.pk) or (self.request.user.is_staff):
             messages.success(self.request, 'Done!')
             return obj
-        messages.warning(self.request, 'You have not permission to this object.')
+        messages.warning(self.request,
+                         'You have not permission to this object.')
         raise Http404
