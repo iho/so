@@ -1,0 +1,11 @@
+---
+- name: Install supervisor
+  apt: name=supervisor state=latest
+#- name: Update supervisor
+#  command: pip install supervisor -U
+
+#- name: Update supervisor1
+#  command:  sudo ln -s /usr/local/bin/supervisord /usr/bin/supervisord
+
+#- name: Update supervisor2
+#  command: sudo ln -s /usr/local/etc/supervisord.conf /etc/supervisord.conf

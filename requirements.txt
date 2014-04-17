@@ -10,6 +10,7 @@ ipdb==0.8
 django-imagekit==3.2.1
 pytz==2014.2
 
+uWSGI==2.0.3
 psycopg2==2.5.2
 
 

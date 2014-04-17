@@ -35,7 +35,9 @@
 
 - name: Pip congif
   template: src=pip.j2 dest=~/.pip/pip.conf
-
-
+- name: Make virtualenvwrapper
+  command: mkdir -p /.virtualenvs 
+- name: Make virtualenvwrapper
+  shell:  '"export WORKON_HOME=$HOME/.virtualenvs" >> ~/.bashrc && "export PROJECT_HOME=$HOME/Devel" >> ~/.bashrc && "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc'
 
 
