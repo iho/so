@@ -1,1 +1,1 @@
-sudo ln -s /etc/nginx/sites-available/stackoeverflow.conf nginx.conf
+sudo ln -s /etc/nginx/conf.d/stackoeverflow.conf nginx.conf

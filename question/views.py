@@ -5,6 +5,8 @@ from __future__ import unicode_literals
 import json
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import login
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse
@@ -20,8 +22,6 @@ from taggit.models import Tag
 from .mixins import (AjaxableResponseMixin, AllPagesMixin,
                      OwnerStaffRequiredMixin)
 from .models import *
-from django.contrib.auth.views import login
-from django.contrib.auth.forms import UserCreationForm
 
 
 class TagListView(AllPagesMixin, ListView):
@@ -165,6 +165,7 @@ class UpdateProfile(AjaxableResponseMixin, AllPagesMixin,  OwnerStaffRequiredMix
 def vote(request, pk=0):
     get_object_or_404(Question, pk=pk).add_plus(request.user)
     return HttpResponse('Voted')
+
 
 @login_required
 def vote_answer(request, pk=0):

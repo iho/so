@@ -68,9 +68,9 @@ MIDDLEWARE_CLASSES = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_db',
-        'USER': 'django_user',
-        'PASSWORD': 'qwerty',
+        'NAME': 'test_db',
+        'USER': 'test_user',
+        'PASSWORD': 'test_db',
         'HOST': 'localhost',
         'PORT': '5432',
     },
@@ -173,15 +173,52 @@ SOCIALACCOUNT_PROVIDERS = \
       }
      }
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    }
+}
+
 AUTH_USER_MODEL = 'question.User'
+ALLOWED_HOSTS = ['.singularity.su.', '.localhost.', '.django.', '.singularity.su', '.localhost', '.django']
 
-
-if getpass.getuser() != 'engarde':
+if getpass.getuser() == 'ihor':
     DEBUG = True
-else:
-
     from local_settings import *
-
+    print('local')
+else:
+    DEBUG = False
+    TEMPLATE_DEBUG = False
+    print('production')
+DEBUG = False
+TEMPLATE_DEBUG = False
+print('production')
 
 if DEBUG:
     INSTALLED_APPS += (
