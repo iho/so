@@ -1,0 +1,26 @@
+---
+- name: Remove apache and nginx
+  apt: name={{ item }}
+      state=absent
+      purge=yes
+      force=yes
+  with_items:
+      - apache*
+      - nginx*
+- name: Download signin key for nginx
+  get_url: url=http://nginx.org/keys/nginx_signing.key dest=/tmp/
+
+- name: add key 
+  command: apt-key add /tmp/nginx_signing.key
+
+- name: New source list
+  template: src=conf.j2 dest=/etc/apt/sources.list
+
+
+- name: upgrade dist
+  apt: update_cache=yes  upgrade=dist
+
+- name: Install Nginx
+  apt: name=nginx state=latest
+  notify:
+    - start nginx

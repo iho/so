@@ -4,6 +4,7 @@ from __future__ import print_function, unicode_literals
 
 from django import forms
 from django.forms import ModelForm
+from django.utils.translation import ugettext_lazy as _
 
 from crispy_forms.helper import FormHelper
 from crispy_forms_foundation.layout import *
@@ -61,3 +62,16 @@ class UserForm(ModelForm):
     # Field('checkboxes', style="background: #FAFAFA; padding: 10px;"),)
     #     self.helper.add_input(Submit('submit', 'Create'))
     #     super(ProfileForm, self).__init__(*args, **kwargs)
+
+
+class SignupForm(forms.Form):
+    name = forms.CharField(label=_("User name"), widget=forms.TextInput(
+        attrs={'placeholder':
+               _('Username'),
+               'autofocus': 'autofocus'}), required=True)
+    email = forms.EmailField(label=_("E-mail"), required=True)
+
+    password1 = forms.CharField(
+        label=_("Password"), widget=forms.PasswordInput, required=True)
+    password2 = forms.CharField(
+        label=_("Password (again)"), widget=forms.PasswordInput, required=True)

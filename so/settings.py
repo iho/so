@@ -179,7 +179,7 @@ AUTH_USER_MODEL = 'question.User'
 if getpass.getuser() != 'engarde':
     DEBUG = True
 else:
-    
+
     from local_settings import *
 
 

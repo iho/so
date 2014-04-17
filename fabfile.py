@@ -49,6 +49,7 @@ def push(comment=False):
     local('git push', capture=False)
     green('All ok')
 
+
 @task
 def db_setup():
     local(';\n'.join([

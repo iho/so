@@ -1,0 +1,9 @@
+---
+- name: Run me from non root user
+  hosts: all
+# user: root
+  # remote_user: user
+ # sudo: yes
+
+  roles:
+      - python

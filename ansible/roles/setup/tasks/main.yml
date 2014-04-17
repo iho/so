@@ -1,0 +1,13 @@
+---
+- name: Install basic staff [python and python-apt]
+  raw: "apt-get install python2.7-minimal python-apt -y"
+- name: Install basic staff via Ansible packega manager
+  apt: name={{ item }} state=installed
+  with_items:
+      #  - bash-completition
+      - git-core
+      - mercurial
+      - htop
+      - ncdu 
+      - redis-server
+      - sudo

@@ -41,5 +41,6 @@ urlpatterns = patterns('',
                            name='cats'),
                        url(r'^cat/(?P<slug>[-a-zA-Z0-9_]+)/$',
                            CatDetailView.as_view(), name='cat'),
-
+                       url(r'^vote_answer/(?P<pk>\d+)/$' , vote_answer, name='vote_answer'),
+                       url(r'^vote/(?P<pk>\d+)/$' , vote, name='vote'),
                        )

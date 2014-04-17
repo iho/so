@@ -1,0 +1,6 @@
+[web]
+# roo # from .ssh/config
+# root@91.231.87.213 # oblivius
+db ansible_ssh_port=22 ansible_ssh_host=91.231.87.213 ansible_ssh_user=root
+
+

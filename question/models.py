@@ -39,7 +39,8 @@ class User(AbstractBaseUser):
     avatar_thumbnail = ImageSpecField(
         source='avatar', processors=[ResizeToFill(200, 200)], format='JPEG', options={'quality': 60})
     use_avatar = models.BooleanField(default=True)
-    username = models.CharField(max_length=80, default="Unnamed", blank=True, help_text='Email stores in lowercase')
+    username = models.CharField(
+        max_length=80, default="Unnamed", blank=True, help_text='Email stores in lowercase')
     jabber = models.CharField('Jabber', max_length=80, blank=True)
     icq = models.CharField('ICQ', max_length=12, blank=True)
     msn = models.CharField('MSN', max_length=80, blank=True)
@@ -48,7 +49,7 @@ class User(AbstractBaseUser):
     location = models.CharField(_('Location'), max_length=30, blank=True)
     is_moderator = models.BooleanField(default=False)
     created = models.DateTimeField(verbose_name=_('Crated'), auto_now_add=True)
-    
+
     views = models.PositiveIntegerField(_('Views'), default=0, editable=False)
 
     class Meta:
@@ -56,7 +57,6 @@ class User(AbstractBaseUser):
         verbose_name_plural = _('Profiles')
         ordering = ['-created']
         get_latest_by = 'created'
-        
 
     def get_absolute_url(self):
         return reverse("profile", args=[self.id])
@@ -131,13 +131,12 @@ class Question(models.Model):
     tags_list.short_description = 'Tags'
 
     def add_plus(self, user):
-        if not user in self.voted.all():
+        if not (user in self.voted.all()):
             self.raiting += 1
             self.voted.add(user)
             self.save()
 
     def get_absolute_url(self):
-        print(self.slug)
         return reverse('question', args=[str(self.slug)])
 
     def save(self, *args, **kwargs):

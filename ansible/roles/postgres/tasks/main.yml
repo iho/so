@@ -1,0 +1,24 @@
+---
+- name: Install postgres
+  apt: name={{ item }} state=installed
+  with_items:
+      - postgresql 
+      - libpq-dev
+      - python-psycopg2
+
+- name : Create db
+  sudo_user: postgres
+  sudo: yes
+  postgresql_db: name={{ dbname }} encoding='UTF-8'
+- name : Create user
+  postgresql_user:  name={{ dbuser }} password={{ dbpass  }}
+  sudo_user: postgres
+  sudo: yes
+- name : Grant all privs.
+  sudo_user: postgres
+  sudo: yes
+  postgresql_privs: >
+    db={{ dbname }}
+    privs=ALL
+    type=database
+    role={{ dbuser }}

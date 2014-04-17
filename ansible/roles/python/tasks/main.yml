@@ -1,0 +1,41 @@
+---
+- name: Install Pil/Pillow dependency
+  apt: name={{ item }} state=installed
+  with_items:
+      - libtiff4-dev
+      - libjpeg8-dev
+      - zlib1g-dev 
+      - libfreetype6-dev
+      - liblcms2-dev
+      - libwebp-dev  
+
+- name: Install python staff
+  apt: name={{ item }} state=installed
+  with_items:
+      - python-pip
+      - python-dev
+      - build-essential
+      - uwsgi 
+      - uwsgi-plugin-python
+      - libssl-dev 
+      - libffi-dev
+
+
+
+- name: Python packages
+  pip: name={{ item }} state=latest
+  with_items:
+      - fabric
+      - virtualenvwrapper
+
+
+- name: Create dir for pip congif
+  command: mkdir -p ~/.pip
+
+
+- name: Pip congif
+  template: src=pip.j2 dest=~/.pip/pip.conf
+
+
+
+

@@ -17,18 +17,20 @@ from braces.views import (LoginRequiredMixin, PermissionRequiredMixin,
 from forms import *
 from taggit.models import Tag
 
+from .mixins import (AjaxableResponseMixin, AllPagesMixin,
+                     OwnerStaffRequiredMixin)
 from .models import *
-from .views_mixin import (AjaxableResponseMixin, AllPagesMixin,
-                          OwnerStaffRequiredMixin)
+from django.contrib.auth.views import login
+from django.contrib.auth.forms import UserCreationForm
 
 
-class TagListView(ListView):
+class TagListView(AllPagesMixin, ListView):
     _name_page = 'List of tags'
     model = Tag
-    template_name = 'cbv/list_tags.html'
+    template_name = 'cbv/list.html'
 
 
-class TagDetailView(ListView):
+class TagDetailView(AllPagesMixin, ListView):
     _name_page = 'Question width tag'
     template_name = 'cbv/list_question_tags.html'
     paginate_by = 10
@@ -37,13 +39,13 @@ class TagDetailView(ListView):
         return Question.objects.filter(tags__slug__iexact=self.kwargs['slug']).select_related()
 
 
-class CatListView(ListView):
+class CatListView(AllPagesMixin, ListView):
     _name_page = 'List of categories'
     model = Category
-    template_name = 'cbv/list_cats.html'
+    template_name = 'cbv/list.html'
 
 
-class CatDetailView(ListView):
+class CatDetailView(AllPagesMixin, ListView):
     _name_page = 'Question width categories'
     model = Category
     template_name = 'cbv/list_question_cats.html'
@@ -58,12 +60,12 @@ class CatDetailView(ListView):
         return ctx
 
 
-class MainView(ListView):
+class MainView(AllPagesMixin, ListView):
     template_name = "main.html"
     model = Question
 
 
-class CreateQuestion(LoginRequiredMixin, CreateView):
+class CreateQuestion(AllPagesMixin, LoginRequiredMixin, CreateView):
     _name_page = 'Create Question '
     model = Question
     form_class = QuestionForm
@@ -73,10 +75,15 @@ class CreateQuestion(LoginRequiredMixin, CreateView):
         return {'owner': self.request.user.id}
 
 
-class DetailQuestion(DetailView):
+class DetailQuestion(AllPagesMixin, DetailView):
     _name_page = 'Question detail'
     model = Question
     template_name = 'question.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(DetailQuestion, self).get_context_data(**kwargs)
+        ctx['current_slug'] = self.kwargs['slug']
+        return ctx
 
 
 class ListQuestion(AllPagesMixin, ListView):
@@ -93,33 +100,33 @@ class ListQuestion(AllPagesMixin, ListView):
         return ctx
 
 
-class UpdateQuestion(StaffuserRequiredMixin, UpdateView):
+class UpdateQuestion(AllPagesMixin, StaffuserRequiredMixin, UpdateView):
     _name_page = 'Update  Question '
     model = Question
     form_class = QuestionForm
     template_name = 'cbv/form.html'
 
 
-class DeleteQuestion( StaffuserRequiredMixin, DeleteView):
+class DeleteQuestion(AllPagesMixin, OwnerStaffRequiredMixin, DeleteView):
     _name_page = 'Delete Question '
     model = Question
     template_name = 'cbv/delete.html'
     success_url = '/'
 
 
-class ProfileView(AllPagesMixin ,DetailView):
+class ProfileView(AllPagesMixin, DetailView):
     _name_page = 'Page of profile'
     model = User
     template_name = 'profile_detail.html'
 
 
-class ProfileList(ListView):
+class ProfileList(AllPagesMixin, ListView):
     _name_page = 'Profile`s list'
     model = User
-    template_name = 'cbv/list_profiles.html'
+    template_name = 'cbv/list-profiles.html'
 
 
-class CreateAnswer(AjaxableResponseMixin, LoginRequiredMixin, CreateView):
+class CreateAnswer(AllPagesMixin, AjaxableResponseMixin, LoginRequiredMixin, CreateView):
     model = Answer
     form_class = AnswerForm
     template_name = 'cbv/form_upload.html'
@@ -132,20 +139,20 @@ class CreateAnswer(AjaxableResponseMixin, LoginRequiredMixin, CreateView):
     #     form.instance.owner = self.request.user
 
 
-class UpdateAnswer(PermissionRequiredMixin, StaffuserRequiredMixin, UpdateView):
+class UpdateAnswer(PermissionRequiredMixin, OwnerStaffRequiredMixin, UpdateView):
     permission_required = "auth.change_user"
     model = Answer
     form_class = AnswerForm
     template_name = 'cbv/form.html'
 
 
-class DeleteAnswer(OwnerStaffRequiredMixin, DeleteView):
+class DeleteAnswer(OwnerStaffRequiredMixin, AllPagesMixin, DeleteView):
     model = Answer
     template_name = 'cbv/delete.html'
     success_url = '/'
 
 
-class UpdateProfile(AjaxableResponseMixin, StaffuserRequiredMixin, UpdateView):
+class UpdateProfile(AjaxableResponseMixin, AllPagesMixin,  OwnerStaffRequiredMixin, UpdateView):
     model = User
     form_class = UserForm
     template_name = 'cbv/form_upload.html'
@@ -156,13 +163,10 @@ class UpdateProfile(AjaxableResponseMixin, StaffuserRequiredMixin, UpdateView):
 
 @login_required
 def vote(request, pk=0):
-    user = request.user
-    get_object_or_404(Question, pk=pk).add_plus(user)
+    get_object_or_404(Question, pk=pk).add_plus(request.user)
     return HttpResponse('Voted')
-
 
 @login_required
 def vote_answer(request, pk=0):
-    user = request.user
-    get_object_or_404(Answer, pk=pk).add_plus(user)
+    get_object_or_404(Answer, pk=pk).add_plus(request.user)
     return HttpResponse('Voted')
