@@ -2,6 +2,6 @@ syntax: glob
 *.py[co]
 *.db
 *.sqlite3
-static
+prod_static
 media
 .idea

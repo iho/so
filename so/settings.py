@@ -115,7 +115,7 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = ('templates',)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'prod_static')
 
 LOGGING = {
     'version': 1,
@@ -216,9 +216,7 @@ else:
     DEBUG = False
     TEMPLATE_DEBUG = False
     print('production')
-DEBUG = False
-TEMPLATE_DEBUG = False
-print('production')
+
 
 if DEBUG:
     INSTALLED_APPS += (
