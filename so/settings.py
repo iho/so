@@ -115,7 +115,7 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = ('templates',)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATIC_ROOT = os.path.join(BASE_DIR, 'prod_static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGGING = {
     'version': 1,
