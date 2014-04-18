@@ -1,3 +1,4 @@
 -r requirements.txt
 Fabric==1.8
+fabtools==0.17.0
 django-debug-toolbar==1.0.1

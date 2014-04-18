@@ -12,6 +12,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_USE_TLS = True
 
+SESSION_ENGINE = 'redis_sessions.session'
+
 #DEFAULT_FROM_EMAIL  = EMAIL_HOST_USER
 
 ROOT_URLCONF = 'so.urls'
