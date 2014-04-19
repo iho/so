@@ -63,38 +63,37 @@
 
 
 {% include "footer.html" %}
-{% compress css %}
-    <link rel="icon" href="{{ STATIC_URL }}images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/foundation.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/foundation.min.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/normalize.css">
-    {#<link rel="stylesheet" href="{{ STATIC_URL }}fonts/foundation-icons.css"> #}
-    {#<link rel="stylesheet" href="{{ STATIC_URL }}fonts/foundation-icons.woff"> #}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
-{% endcompress %}
 
-
+<link rel="icon" href="{{ STATIC_URL }}images/favicon.png" type="image/x-icon">
 {% compress js %}
 <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation.min.js"></script>
-      <script src="{{ STATIC_URL }}js/modernizr.js"></script> 
-      <script src="{{ STATIC_URL }}js/foundation/foundation.js"></script>
-      <script src="{{ STATIC_URL }}js/foundation/foundation.abide.js"></script>
-      <script src="{{ STATIC_URL }}js/foundation/foundation.accordion.js"></script>
-      <script src="{{ STATIC_URL }}js/foundation/foundation.alert.js"></script>
-      <script src="{{ STATIC_URL }}js/foundation/foundation.clearing.js"></script>
-      <script src="{{ STATIC_URL }}js/foundation/foundation.dropdown.js"></script>
-      <script src="{{ STATIC_URL }}js/foundation/foundation.interchange.js"></script>
-      <script src="{{ STATIC_URL }}js/foundation/foundation.magellan.js"></script>
-      <script src="{{ STATIC_URL }}js/foundation/foundation.topbar.js"></script>
-      <script src="{{ STATIC_URL }}js/foundation/foundation.orbit.js"></script>
-      <script src="{{ STATIC_URL }}js/foundation/foundation.joyride.js"></script>
-      <script src="{{ STATIC_URL }}js/foundation/foundation.tab.js"></script>
-      <script src="{{ STATIC_URL }}js/foundation/foundation.reveal.js"></script>
-      <script src="{{ STATIC_URL }}js/main.js"></script>
+<script src="{{ STATIC_URL }}js/foundation.min.js"></script>
+<script src="{{ STATIC_URL }}js/foundation/foundation.topbar.js"></script>
+<script src="{{ STATIC_URL }}js/foundation/foundation.reveal.js"></script>
+<script src="{{ STATIC_URL }}js/foundation/foundation.alert.js"></script>
+
+<script src="{{ STATIC_URL }}js/foundation/foundation.interchange.js"></script>
+<script src="{{ STATIC_URL }}js/main.js"></script>
 {% endcompress %}
 
+{#<script src="{{ STATIC_URL }}js/foundation/foundation.accordion.js"></script>#}
+{#<script src="{{ STATIC_URL }}js/foundation/foundation.tab.js"></script>#}
+{#<script src="{{ STATIC_URL }}js/foundation/foundation.joyride.js"></script>#}
+{#<script src="{{ STATIC_URL }}js/foundation/foundation.dropdown.js"></script>#}
+{#<script src="{{ STATIC_URL }}js/foundation/foundation.abide.js"></script>#}
+{#<script src="{{ STATIC_URL }}js/foundation/foundation.clearing.js"></script>#}
+{#<script src="{{ STATIC_URL }}js/foundation/foundation.magellan.js"></script>#}
+{#<script src="{{ STATIC_URL }}js/modernizr.js"></script>#} 
+{#<script src="{{ STATIC_URL }}js/foundation/foundation.orbit.js"></script>#}
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700" />
   </body>
 </html>
+{% compress css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/foundation.min.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/normalize.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+{% endcompress %}
+
+{#<link rel="stylesheet" href="{{ STATIC_URL }}fonts/foundation-icons.css"> #}
+{#<link rel="stylesheet" href="{{ STATIC_URL }}fonts/foundation-icons.woff"> #}
 
