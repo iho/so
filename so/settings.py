@@ -16,6 +16,10 @@ EMAIL_USE_TLS = True
 
 #DEFAULT_FROM_EMAIL  = EMAIL_HOST_USER
 
+COMPRESS_ENABLED = True
+COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
+
 ROOT_URLCONF = 'so.urls'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -30,7 +34,6 @@ SECRET_KEY = 's^fu1d4fe($5@&9@allfjxkwu!0esp!fsnki3io!n2l+t5u-xl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-TEMPLATE_DEBUG = DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CRISPY_TEMPLATE_PACK = 'foundation-5'
@@ -140,6 +143,7 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.bitbucket',
     'allauth.socialaccount.providers.github',
     'compressor',
 )
@@ -154,6 +158,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "allauth.account.context_processors.account",
     "allauth.socialaccount.context_processors.socialaccount",
+    "question.context_processors.forms_context",
 )
 
 
@@ -212,19 +217,17 @@ STATICFILES_FINDERS = (
     # other finders..
     'compressor.finders.CompressorFinder',
 )
-COMPRESS = True
-COMPRESS_ENABLED = True
 AUTH_USER_MODEL = 'question.User'
-ALLOWED_HOSTS = ['.singularity.su.', '.localhost.', '.django.', '.singularity.su', '.localhost', '.django']
+ALLOWED_HOSTS = ['.singularity.su.', '.localhost.',
+                 '.django.', '.singularity.su', '.localhost', '.django']
 
 if getpass.getuser() == 'ihor':
-    DEBUG = True
+    TEMPLATE_DEBUG = DEBUG = True
     from local_settings import *
     print('local')
 else:
-    DEBUG = False
-    TEMPLATE_DEBUG = False
     print('production')
+    TEMPLATE_DEBUG = DEBUG = False
 
 
 if DEBUG:

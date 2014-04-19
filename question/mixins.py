@@ -3,15 +3,36 @@
 from __future__ import division, print_function, unicode_literals
 
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
-from django.db.models import Avg, Count
 from django.http import Http404
 from django.shortcuts import redirect
+from django.utils.cache import patch_response_headers
+from django.views.decorators.cache import cache_page, never_cache
 
 from future_builtins import ascii, filter, hex, map, oct, zip
 
-from .forms import SignupForm
 from .models import Category
+
+
+class CacheMixin(object):
+    cache_timeout = 60
+
+    def get_cache_timeout(self):
+        return self.cache_timeout
+
+    def dispatch(self, *args, **kwargs):
+        return cache_page(self.get_cache_timeout())(super(CacheMixin, self).dispatch)(*args, **kwargs)
+
+
+class CacheControlMixin(object):
+    cache_timeout = 60
+
+    def get_cache_timeout(self):
+        return self.cache_timeout
+
+    def dispatch(self, *args, **kwargs):
+        response = super(CacheControlMixin, self).dispatch(*args, **kwargs)
+        patch_response_headers(response, self.get_cache_timeout())
+        return response
 
 
 class AjaxableResponseMixin(object):
@@ -47,12 +68,6 @@ class AllPagesMixin(object):
 
     def get_context_data(self, **kwargs):
         ctx = super(AllPagesMixin, self).get_context_data(**kwargs)
-        ctx['qcats'] = Category.objects.annotate(
-            num_question=Count('question')).order_by('-num_question')[:15]
-        ctx['show_forms'] = True
-        ctx['form_reg'] = SignupForm()
-        ctx['form_login'] = AuthenticationForm()
-
         ctx['current_page'] = getattr(self, '_name_page', '')
 
         ctx['is_main'] = self.__class__.__name__ == "MainView" or False
