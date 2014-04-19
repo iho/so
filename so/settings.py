@@ -141,8 +141,8 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
+    'compressor',
 )
-
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
@@ -206,7 +206,14 @@ LOGGING = {
         },
     }
 }
-
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
+COMPRESS = True
+COMPRESS_ENABLED = True
 AUTH_USER_MODEL = 'question.User'
 ALLOWED_HOSTS = ['.singularity.su.', '.localhost.', '.django.', '.singularity.su', '.localhost', '.django']
 

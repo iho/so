@@ -5,3 +5,4 @@ syntax: glob
 prod_static
 media
 .idea
+CACHE
