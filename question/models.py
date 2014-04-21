@@ -35,9 +35,8 @@ class Category(models.Model):
 
 
 class User(AbstractBaseUser):
-    avatar = models.ImageField(upload_to='avatars', blank=True)
-    avatar_thumbnail = ImageSpecField(
-        source='avatar', processors=[ResizeToFill(200, 200)], format='JPEG', options={'quality': 60})
+    avatar = models.ImageField(upload_to='avatars')
+   # avatar_thumbnail = ImageSpecField(source='avatar', processors=[ResizeToFill(200, 200)], format='JPEG', options={'quality': 60})
     use_avatar = models.BooleanField(default=True)
     username = models.CharField(
         max_length=80, default="Unnamed", blank=True, help_text='Email stores in lowercase')
@@ -63,7 +62,7 @@ class User(AbstractBaseUser):
 
     def get_avatar(self):
         if self.use_avatar and self.avatar:
-            return self.avatar_thumbnail.url
+            return self.avatar.url
         email_hash = hashlib.md5(self.email.lower()).hexdigest()
         url = 'http://www.gravatar.com/avatar/%s?s=200&d=identicon' % email_hash
         return url
@@ -122,7 +121,7 @@ class Question(models.Model):
     voted = models.ManyToManyField(
         User, verbose_name=_('Voted'), related_name='voted_question', null=True, blank=True)
     cat = models.ForeignKey(
-        Category, verbose_name=_('Category'), blank=True, null=True)
+        Category, verbose_name=_('Category'), blank=False, null=True)
 
     views = models.PositiveIntegerField(_('Views'), default=0, editable=False)
 

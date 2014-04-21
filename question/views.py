@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import login
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse_lazy
+from django.db.models import F
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import (CreateView, DeleteView, DetailView, FormView,
@@ -71,8 +72,11 @@ class CreateQuestion(AllPagesMixin, LoginRequiredMixin, CreateView):
     form_class = QuestionForm
     template_name = 'cbv/form.html'
 
-    def get_initial(self):
-        return {'owner': self.request.user.id}
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        # self.object.save()
+
+        return super(CreateQuestion, self).form_valid(form)
 
 
 class DetailQuestion(AllPagesMixin, DetailView):
@@ -84,6 +88,12 @@ class DetailQuestion(AllPagesMixin, DetailView):
         ctx = super(DetailQuestion, self).get_context_data(**kwargs)
         ctx['current_slug'] = self.kwargs['slug']
         return ctx
+
+    def get_object(self, queryset=None):
+        obj = super(DetailQuestion, self).get_object(queryset=queryset)
+        obj.views = F('views') + 1
+        obj.save()
+        return obj
 
 
 class ListQuestion(AllPagesMixin, ListView):

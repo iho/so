@@ -13,12 +13,10 @@ from .models import *
 
 
 class QuestionForm(ModelForm):
-    owner = forms.ModelChoiceField(
-        widget=forms.HiddenInput, queryset=User.objects.all())
 
     class Meta:
         model = Question
-        exclude = ('raiting',  'voted')
+        exclude = ('raiting',  'voted', 'owner')
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
@@ -31,12 +29,10 @@ class QuestionForm(ModelForm):
 
 
 class AnswerForm(ModelForm):
-    owner = forms.ModelChoiceField(
-        widget=forms.HiddenInput, queryset=User.objects.all())
 
     class Meta:
         model = Answer
-        exclude = ('raiting', 'voted')
+        exclude = ('raiting', 'voted', 'owner')
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()

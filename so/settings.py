@@ -12,7 +12,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_USE_TLS = True
 
-#SESSION_ENGINE = 'redis_sessions.session'
 
 #DEFAULT_FROM_EMAIL  = EMAIL_HOST_USER
 
@@ -224,10 +223,12 @@ ALLOWED_HOSTS = ['.singularity.su.', '.localhost.',
 if getpass.getuser() == 'ihor':
     TEMPLATE_DEBUG = DEBUG = True
     from local_settings import *
+    COMPRESS_ENABLED = False
     print('local')
 else:
     print('production')
     TEMPLATE_DEBUG = DEBUG = False
+    SESSION_ENGINE = 'redis_sessions.session'
 
 
 if DEBUG:

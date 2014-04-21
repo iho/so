@@ -17,10 +17,8 @@
 	  </div>
 	    <div class="large-11 columns">
 
-<form>
   <div class="row" id="question">
     <div class="large-12 columns">
-    <a href="#"><span class="label">Edit</span></a>
     
       <label>
         ..sdffsdfsdfsdfsWhen I switch to command line I can log in, but I have no idea how to fix this issue there. Network is not working then either, although the computer is connected via cable. Maybe the network config is not loaded (DHCP is off). So I cannot run updates or reinstall.
@@ -33,9 +31,10 @@
       </label>  
     </div>
   </div>
-</form>
 	    
-	    <br/>
+	    
+        <a href="{#{% url "profile" object.owner.pk %}#} #"> Username {{ object.owner.username }}</a>
+
 	    <ul class="inline-list">
 	      <li>
 	        <a href="#"><span class="label">Link 3</span></a>
@@ -48,19 +47,7 @@
 	      </li>
 </ul>
 
-<div class="row">
-<div class="large-6 columns">
-	      <img src="http://placehold.it/80x80"><br/>
-</div>
 
-<div class="large-6 columns">
-	  <div class="callout panel radius">
-	  	        <a href="#"><span class="label">Link 3</span></a>
-        Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow.
-      
-      </div>
-</div>
-</div>
 
 <br/>
 </div>

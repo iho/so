@@ -1,21 +1,17 @@
 
-{% if show_forms %}
-<a href="#" data-reveal-id="modal-login" class="radius">Login</a>
+
 <div id="modal-login" class="reveal-modal" data-reveal>
-<a href="#" data-reveal-id="modal-reg" class="radius">Registration</a>
   {{  form_login.errors }}
 <form action="{% url "account_login" %}" method="post">{% csrf_token %}
 {#    {% crispy form_login form_login.helper %}#}
 {{ form_login.as_ul }}
     <button class="primaryAction" type="submit">Login</button>
             <a class="close-reveal-modal">&#215;</a>
-
+            </form>
 </div>
 
 
-<a href="#" data-reveal-id="modal-reg" class="radius">Registration</a>
 <div id="modal-reg" class="reveal-modal" data-reveal>
-<a href="#" data-reveal-id="modal-login" class="radius">Login</a>
   {{  form_reg.errors }}
 <form action="{% url "account_login" %}" method="post">{% csrf_token %}
 {#    {% crispy form_reg form_reg.helper %}#}
@@ -23,6 +19,7 @@
     <button class="primaryAction" type="submit">Register</button>
             <a class="close-reveal-modal">&#215;</a>
 
+            </form>
 </div>
 
-{% endif %}
+
