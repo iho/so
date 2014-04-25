@@ -2,7 +2,7 @@
 # coding: utf-8
 from __future__ import print_function, unicode_literals
 
-from fabric.api import cd, env, local, run, sudo, task
+from fabric.api import cd, env, local, run, sudo, task, lcd
 from fabric.colors import green, red
 from fabric.contrib.project import rsync_project
 from fabric.operations import prompt
@@ -44,7 +44,21 @@ def mn(appname):
 
 
 def venv_command(command='help', virtualenv='stackoverflow'):
-    return "/bin/bash -l -c 'source /usr/local/bin/virtualenvwrapper.sh && workon " + virtualenv + " && python " + command + "'"
+    run("/bin/bash -l -c 'source /usr/local/bin/virtualenvwrapper.sh && workon " +
+        virtualenv + " && " + command + " '")
+
+
+@task
+def restart():
+
+    with cd('stackoverflow'):
+        run('workon stackoverflow')
+        run('hg pull')
+        run('hg update')
+    venv_command('python manage.py collectstatic -y')
+    run('touch /home/web/stackoverflow/uwsgi.ini')
+    sudo('ln -s nginx.conf /etc/nginx/conf.d/stackoeverflow.conf ')
+    sudo('service nginx restart')
 
 
 @task
@@ -57,15 +71,9 @@ def push(comment=False):
     local('autopep8 --in-place -r . ')
     local('hg add .')
     local('hg ci -m "{}"'.format(comment), capture=False)
+    local('hg push')
     green('All ok')
-    with cd('stackoverflow'):
-        run('workon stackoverflow')
-        run('hg pull')
-        run('hg update')
-        venv_command('python manage.py collectstatic')
-        run('touch /home/web/stackoverflow/uwsgi.ini')
-        sudo('ln -s nginx.conf /etc/nginx/conf.d/stackoeverflow.conf ')
-        sudo('service nginx restart')
+    restart()
 
 
 @task
@@ -79,12 +87,7 @@ def db_setup():
 
 @task
 def r():
-    local(';\n'.join([
-        'python ./manage.py syncdb',
-        'python ./manage.py migrate',
-        'python ./manage.py collectstatic --noinput',
-        'python ./manage.py run_gunicorn',
-    ]))
+    local('python ./manage.py runserver')
 
 
 @task
@@ -109,6 +112,7 @@ def setup_sass():
     print('foundation new PROJECT_NAM \n sass watch')
 
 
+@task
 def install_pillow():
     require.deb.packages([
         'libtiff4-dev',
@@ -120,12 +124,24 @@ def install_pillow():
     ])
 
 
+@task
 def setup_python_packeges():
     require.python.packages(['fabric', 'virtualenvwrapper'], use_sudo=True)
 
 
-def pip_cache():
-    require.file('/tmp/hello.txt', source='files/hello.txt')
+@task
+def pip_wraper():
+    with lcd('/home/ihor/.pip'):
+        require.directory('~/.pip', owner='web')
+        #require.file('~/.pip/pip.conf', source='pip.conf')
+    text = """ 
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
+"""
+    require.directory('~/.virtualenvs', owner='web')
+    require.file('~/.bashrc', contents=text)
+
 
 
 @task
