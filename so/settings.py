@@ -98,7 +98,7 @@ PASSWORD_HASHERS = (
 
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'ua'
 
 TIME_ZONE = 'UTC'
 
@@ -223,7 +223,11 @@ ALLOWED_HOSTS = ['.singularity.su.', '.localhost.',
 if getpass.getuser() == 'ihor':
     TEMPLATE_DEBUG = DEBUG = True
     from local_settings import *
+
+    INSTALLED_APPS += ('django_nose',)
     COMPRESS_ENABLED = False
+
+    TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
     print('local')
 else:
     print('production')

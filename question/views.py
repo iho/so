@@ -63,7 +63,10 @@ class CatDetailView(AllPagesMixin, ListView):
 
 class MainView(AllPagesMixin, ListView):
     template_name = "main.html"
-    model = Question
+    def get_queryset(self):
+        #import ipdb; ipdb.set_trace()
+#  self.request.REQUEST.get('action')
+        return Question.objects.all()
 
 
 class CreateQuestion(AllPagesMixin, LoginRequiredMixin, CreateView):

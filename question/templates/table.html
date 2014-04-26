@@ -1,48 +1,48 @@
 <table>
-  <thead>
+    <thead>
+        <tr>
+            <th width="470">  </th>
+            <th width="20">Table Header</th>
+            <th width="20">Table Header</th>
+            <th width="20">Table Header</th>
+        </tr>
+    </thead>
+    <tbody>
     <tr>
-      <th width="470">  </th>
-      <th width="20">Table Header</th>
-      <th width="20">Table Header</th>
-      <th width="20">Table Header</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="#"> ыаыаfsdf ыаыаfsdf ыаыаfsdf ыаыаfsdf ыаыаfsdf</a><br>
-  tags, tags, tags, tags, 12 xfcjd yfpfl Username</td>
-      <td class="center"> <b>1</b></td>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td><a href="#"> ыаыаfsdf ыаыаfsdf ыаыаfsdf ыаыаfsdf ыаыаfsdf</a><br>
-  tags, tags, tags, tags, 12 xfcjd yfpfl Username</td>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
+        <td><a href="#"> ыаыаfsdf ыаыаfsdf ыаыаfsdf ыаыаfsdf ыаыаfsdf</a><br>
+            tags, tags, tags, tags, 12 xfcjd yfpfl Username</td>
+        <td class="center"> <b>1</b></td>
+        <td>2</td>
+        <td>3</td>
     </tr>
     <tr>
-      <td><a href="#"> ыаыаfsdf ыаыаfsdf ыаыаfsdf ыаыаfsdf ыаыаfsdf</a><br>
-  tags, tags, tags, tags, 12 xfcjd yfpfl Username</td>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
+        <td><a href="#"> ыаыаfsdf ыаыаfsdf ыаыаfsdf ыаыаfsdf ыаыаfsdf</a><br>
+            tags, tags, tags, tags, 12 xfcjd yfpfl Username</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
     </tr>
-  </tbody>
+    <tr>
+        <td><a href="#"> ыаыаfsdf ыаыаfsdf ыаыаfsdf ыаыаfsdf ыаыаfsdf</a><br>
+            tags, tags, tags, tags, 12 xfcjd yfpfl Username</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+    </tr>
+    </tbody>
 </table>
 
 
 <ul class="pagination">
-  <li class="arrow unavailable"><a href="">&laquo;</a></li>
-  <li class="current"><a href="">1</a></li>
-  <li><a href="">2</a></li>
-  <li><a href="">3</a></li>
-  <li><a href="">4</a></li>
-  <li class="unavailable"><a href="">&hellip;</a></li>
-  <li><a href="">12</a></li>
-  <li><a href="">13</a></li>
-  <li class="arrow"><a href="">&raquo;</a></li>
+    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+    <li class="current"><a href="">1</a></li>
+    <li><a href="">2</a></li>
+    <li><a href="">3</a></li>
+    <li><a href="">4</a></li>
+    <li class="unavailable"><a href="">&hellip;</a></li>
+    <li><a href="">12</a></li>
+    <li><a href="">13</a></li>
+    <li class="arrow"><a href="">&raquo;</a></li>
 </ul>
 
 <i class="step fi-address-book size-16"></i>
@@ -50,23 +50,23 @@
 
 <a href="#" data-reveal-id="modal-login" class="radius">Login</a>
 <div id="modal-login" class="reveal-modal" data-reveal>
-  {{  form_login.errors }}
-<form action="{% url "account_login" %}" method="post">{% csrf_token %}
-{#    {% crispy form_login form_login.helper %}#}
-{{ form_login.as_ul }}
-    <button class="primaryAction" type="submit">Login</button>
+    {{  form_login.errors }}
+    <form action="{% url "account_login" %}" method="post">{% csrf_token %}
+        {#    {% crispy form_login form_login.helper %}#}
+        {{ form_login.as_ul }}
+        <button class="primaryAction" type="submit">Login</button>
+        <a class="close-reveal-modal">&#215;</a>
+
+    </div>
+
+
+    <a href="#" data-reveal-id="modal-reg" class="radius">Registration</a>
+    <div id="modal-reg" class="reveal-modal" data-reveal>
+        {{  form_reg.errors }}
+        <form action="{% url "account_login" %}" method="post">{% csrf_token %}
+            {#    {% crispy form_reg form_reg.helper %}#}
+            {{ form_reg.as_ul }}
+            <button class="primaryAction" type="submit">Register</button>
             <a class="close-reveal-modal">&#215;</a>
 
-</div>
-
-
-<a href="#" data-reveal-id="modal-reg" class="radius">Registration</a>
-<div id="modal-reg" class="reveal-modal" data-reveal>
-  {{  form_reg.errors }}
-<form action="{% url "account_login" %}" method="post">{% csrf_token %}
-{#    {% crispy form_reg form_reg.helper %}#}
-{{ form_reg.as_ul }}
-    <button class="primaryAction" type="submit">Register</button>
-            <a class="close-reveal-modal">&#215;</a>
-
-</div>
+        </div>

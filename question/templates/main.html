@@ -1,59 +1,65 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 {% load i18n %}
-{% load crispy_forms_tags %}
 {%  block title %}
-
 {% endblock %}
 {%  block content %}
 
-<div class="row">
-<h2 class="subheader">h1.subheader</h2>
 
-<hr>
-	  <div class="large-1 columns">
-	  <img src="http://placehold.it/10x10"> <br/>
-	  <img src="http://placehold.it/10x10"><br/>
-	  <img src="http://placehold.it/80x80"><br/>
-	  </div>
-	    <div class="large-11 columns">
 
-  <div class="row" id="question">
-    <div class="large-12 columns">
-    
-      <label>
-        ..sdffsdfsdfsdfsWhen I switch to command line I can log in, but I have no idea how to fix this issue there. Network is not working then either, although the computer is connected via cable. Maybe the network config is not loaded (DHCP is off). So I cannot run updates or reinstall.
-	    ..sdffsdfsdfsdfsWhen I switch to command line I can log in, but I have no idea how to fix this issue there. Network is not working then either, although the computer is connected via cable. Maybe the network config is not loaded (DHCP is off). So I cannot run updates or reinstall.
-	    ..sdffsdfsdfsdfsWhen I switch to command line I can log in, but I have no idea how to fix this issue there. Network is not working then either, although the computer is connected via cable. Maybe the network config is not loaded (DHCP is off). So I cannot run updates or reinstall.
+{% if not object_list %}
+<li>{% trans "No objects yet." %}</li>
+{% else %}
 
-	    ..sdffsdfsdfsdfsWhen I switch to command line I can log in, but I have no idea how to fix this issue there. Network is not working then either, although the computer is connected via cable. Maybe the network config is not loaded (DHCP is off). So I cannot run updates or reinstall.
 
-	    ..sdffsdfsdfsdfsWhen I switch to command line I can log in, but I have no idea how to fix this issue there. Network is not working then either, although the computer is connected via cable. Maybe the network config is not loaded (DHCP is off). So I cannot run updates or reinstall.
-      </label>  
-    </div>
-  </div>
-	    
-	    
-        <a href="{#{% url "profile" object.owner.pk %}#} #"> Username {{ object.owner.username }}</a>
-
-	    <ul class="inline-list">
-	      <li>
-	        <a href="#"><span class="label">Link 3</span></a>
-	      </li>
-	      <li>
-	        <a href="#"><span class="label">Link 3</span></a>
-	      </li>
-	      <li>
-	        <a href="#"><span class="label">Link 3</span></a>
-	      </li>
-</ul>
+<dl class="sub-nav">
+    <dt>
+    ➜  
+    </dt>
+    <dd class="active"><a href="#">{% trans "Question" %}</a></dd>
+    <dd><a href="#">{% trans "Cats" %}</a></dd>
+    <dd><a href="#">{% trans "Tags" %}</a></dd>
+    <dd><a href="#">{% trans "Profiles" %}</a></dd>
+</dl>
 
 
 
-<br/>
-</div>
-<hr>
+<table>
+    <thead>
+        <tr>
+            <th width="470">  </th>
+            <th width="20">{% trans "Views" %}</th>
+            <th width="20">{% trans "Raiting" %} </th>
+            <th width="20">{% trans "Answers" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for object in object_list %}
+    {% include "one_question.html" %}
+    {% endfor %}
 
-</div>
+    </tbody>
+</table>
+{% if page_obj.paginator.num_pages > 1 %}
+<ul class="pagination">
+    {% if page_obj.has_previous %}
+    <li class="arrow available"><a href="{% url "questions" %}?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+    <li class="arrow unavailable"><a href="{% url "questions" %}?page=1">&laquo;</li>
+        {% endif %}
+        {% for page_number in ' '|ljust:page_obj.paginator.num_pages %}
+        <li {% if page_obj.number == forloop.counter %} class="current" {% endif %}><a href="{% url "questions" %}?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+        {% endfor %}
 
 
-{% endblock %}
+
+        {% if page_obj.has_next  %}
+        <li class="arrow available"><a href="{% url "questions" %}?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        {% else %}
+        <li class="arrow unavailable"><a href="{% url "questions" %}?page={{ page_obj.paginator.num_pages }}">&raquo;</li>
+            {% endif %}
+            {% endif %}
+        </ul>
+        {% endif %}
+
+
+        {% endblock %}
