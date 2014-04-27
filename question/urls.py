@@ -6,6 +6,8 @@ from django.conf.urls import include, patterns, url
 
 from views import *
 
+#from .rss import LatestEntriesFeed
+
 urlpatterns = patterns('',
                        url(r'^question/add$', CreateQuestion.as_view(),
                            name='question_add'),
@@ -44,4 +46,6 @@ urlpatterns = patterns('',
                        url(r'^vote_answer/(?P<pk>\d+)/$',
                            vote_answer, name='vote_answer'),
                        url(r'^vote/(?P<pk>\d+)/$', vote, name='vote'),
+
+                       #url(r'^latest/feed/$', LatestEntriesFeed()),
                        )
