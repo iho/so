@@ -1,0 +1,224 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-04-27 10:20+0300\n"
+"PO-Revision-Date: 2014-04-27 10:24+0300\n"
+"Last-Translator: Ihor <singularitty@gmail.com>\n"
+"Language-Team: ua <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: forms.py:64
+msgid "User name"
+msgstr "Iмя користувача"
+
+#: forms.py:66
+msgid "Username"
+msgstr "Імя користувача"
+
+#: forms.py:68
+msgid "E-mail"
+msgstr "Email"
+
+#: forms.py:71
+msgid "Password"
+msgstr "Пароль"
+
+#: forms.py:73
+msgid "Password (again)"
+msgstr "Пароль знову"
+
+#: models.py:24 models.py:114
+msgid "Slug"
+msgstr "Индекс"
+
+#: models.py:30 models.py:124
+msgid "Category"
+msgstr "Категорія"
+
+#: models.py:31
+msgid "Categorys"
+msgstr "Категорії"
+
+#: models.py:48
+msgid "Location"
+msgstr "Місце знаходження"
+
+#: models.py:50 models.py:117 models.py:176
+msgid "Crated"
+msgstr "Створенно"
+
+#: models.py:52 models.py:126 templates/main.html:30
+msgid "Views"
+msgstr "Перегляди"
+
+#: models.py:55 templates/header.html:41 templates/header.html.py:55
+msgid "Profile"
+msgstr "Профіль"
+
+#: models.py:56 templates/main.html:21
+msgid "Profiles"
+msgstr "Профілі"
+
+#: models.py:74
+msgid "{}'s "
+msgstr "{}і"
+
+#: models.py:112
+msgid "Name"
+msgstr "Ім`я"
+
+#: models.py:115 models.py:163 models.py:173 templates/main.html:18
+msgid "Question"
+msgstr "Вопрос"
+
+#: models.py:116 models.py:175
+msgid "Updated"
+msgstr "Обновленно"
+
+#: models.py:118 models.py:177
+msgid "Owner"
+msgstr "Власник"
+
+#: models.py:120 models.py:178
+msgid "Plus"
+msgstr "Плюс"
+
+#: models.py:122 models.py:180
+msgid "Voted"
+msgstr "Голос"
+
+#: models.py:164
+msgid "Questions"
+msgstr "Питання"
+
+#: models.py:174
+msgid "Text"
+msgstr "Текст"
+
+#: models.py:194
+msgid "Answer"
+msgstr "Відповідь"
+
+#: models.py:195 templates/main.html:32
+msgid "Answers"
+msgstr "Відповіді"
+
+#: templates/base.html:10
+msgid "Hello"
+msgstr "Привіт"
+
+#: templates/footer.html:11
+msgid "Contact Me"
+msgstr "Контакти"
+
+#: templates/footer.html:12
+msgid "About"
+msgstr "Про сайт"
+
+#: templates/header.html:30
+msgid "Ask Guru"
+msgstr "Парампампам"
+
+#: templates/header.html:32
+msgid "Menu"
+msgstr "Меню"
+
+#: templates/header.html:46
+msgid "Github login"
+msgstr "Вхід через Github"
+
+#: templates/header.html:48
+msgid "Password recovery"
+msgstr "Відновлення паролю"
+
+#: templates/header.html:49 templates/loginreg.html:7
+msgid "Login"
+msgstr "Логін"
+
+#: templates/header.html:50
+msgid "Registration"
+msgstr "Реєстрація"
+
+#: templates/header.html:56
+msgid "Logout"
+msgstr "Вихід"
+
+#: templates/header.html:57
+msgid "Change password"
+msgstr "Змінити пароль"
+
+#: templates/header.html:71
+msgid "Home"
+msgstr "Головна"
+
+#: templates/loginreg.html:19
+msgid "Register"
+msgstr "Регістр ?"
+
+#: templates/main.html:10 templates/question-list.html:11
+#: templates/cbv/list-profiles.html:11 templates/cbv/list.html:11
+#: templates/cbv/list_question_cats.html:11
+#: templates/cbv/list_question_tags.html:11 templates/cbv/main.html:10
+msgid "No objects yet."
+msgstr "Тут ще нічого немає :("
+
+#: templates/main.html:19
+msgid "Cats"
+msgstr "Категорії"
+
+#: templates/main.html:20
+msgid "Tags"
+msgstr "Теги"
+
+#: templates/main.html:31
+msgid "Raiting"
+msgstr "Рейтинг"
+
+#: templates/profile_detail.html:4 templates/question.html:4
+#: templates/cbv/detail.html:4
+msgid "Detail "
+msgstr "Деталі"
+
+#: templates/sidebar.html:5
+msgid "Ask Question"
+msgstr "Спитати"
+
+#: templates/sidebar.html:7
+#, fuzzy
+msgid "Categories"
+msgstr "Категорії"
+
+#: templates/sidebar.html:21
+msgid "ПЕРВЫЙ РАЗ НА САЙТЕ?"
+msgstr "Перший раз на сайті ?"
+
+#: templates/sidebar.html:23
+msgid ""
+"singularity.su —  это социальный сайт вопросов и ответов для IT-"
+"специалистов: программистов, веб-дизайнеров, системных администраторов. Как "
+"stackoverflow.com, только на русском."
+msgstr ""
+"singularity.su —  це соціальний сайт питаннь і відповідей дял IT-"
+"спеціалістів: програмістів, веб-дизайнерів, системних адміністраторів. Як "
+"stackoverflow.com, тільки українською. :)"
+
+#: templates/sidebar.html:25
+msgid "Read More →"
+msgstr "Читати більше →"
+
+#: templates/cbv/delete.html:8
+msgid "Are you sure you want to delete"
+msgstr "Ви впевнені що хочете видалити ?"
+
+#: templates/cbv/delete.html:9
+msgid "Confirm"
+msgstr "Підтвердити"

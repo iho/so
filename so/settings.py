@@ -224,10 +224,8 @@ if getpass.getuser() == 'ihor':
     TEMPLATE_DEBUG = DEBUG = True
     from local_settings import *
 
-    INSTALLED_APPS += ('django_nose',)
     COMPRESS_ENABLED = False
 
-    TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
     print('local')
 else:
     print('production')

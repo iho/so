@@ -1,26 +1,25 @@
-
-
+{% load i18n %}
 <div id="modal-login" class="reveal-modal" data-reveal>
-  {{  form_login.errors }}
-<form action="{% url "account_login" %}" method="post">{% csrf_token %}
-{#    {% crispy form_login form_login.helper %}#}
-{{ form_login.as_ul }}
-<button class="primaryAction" type="submit">{% trans "Login" %}</button>
+    {{  form_login.errors }}
+    <form action="{% url "account_login" %}" method="post">{% csrf_token %}
+        {#    {% crispy form_login form_login.helper %}#}
+        {{ form_login.as_ul }}
+        <button class="primaryAction" type="submit">{% trans "Login" %}</button>
 
-            <a class="close-reveal-modal">&#215;</a>
-            </form>
+        <a class="close-reveal-modal">&#215;</a>
+    </form>
 </div>
 
 
 <div id="modal-reg" class="reveal-modal" data-reveal>
-  {{  form_reg.errors }}
-<form action="{% url "account_login" %}" method="post">{% csrf_token %}
-{#    {% crispy form_reg form_reg.helper %}#}
-{{ form_reg.as_ul }}
-<button class="primaryAction" type="submit">{% trans "Register" %}</button>
-            <a class="close-reveal-modal">&#215;</a>
+    {{  form_reg.errors }}
+    <form action="{% url "account_login" %}" method="post">{% csrf_token %}
+        {#    {% crispy form_reg form_reg.helper %}#}
+        {{ form_reg.as_ul }}
+        <button class="primaryAction" type="submit">{% trans "Register" %}</button>
+        <a class="close-reveal-modal">&#215;</a>
 
-            </form>
+    </form>
 </div>
 
 

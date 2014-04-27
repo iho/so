@@ -16,9 +16,9 @@
     ➜  
     </dt>
     <dd class="active"><a href="#">{% trans "Question" %}</a></dd>
-    <dd><a href="#">{% trans "Cats" %}</a></dd>
-    <dd><a href="#">{% trans "Tags" %}</a></dd>
-    <dd><a href="#">{% trans "Profiles" %}</a></dd>
+    <dd><a href="{% url "cats" %}">{% trans "Cats" %}</a></dd>
+    <dd><a href="{% url "tags" %}">{% trans "Tags" %}</a></dd>
+    <dd><a href="{% url "profiles" %}">{% trans "Profiles" %}</a></dd>
 </dl>
 
 

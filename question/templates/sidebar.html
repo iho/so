@@ -4,7 +4,7 @@
     <aside class="large-3 columns">
     <a href="{% url "question_add" %}" class="button">{% trans "Ask Question"  %}</a>
 {% if qcats %}
-      <h5>Categories</h5>
+<h5> {% trans  "Categories" %}</h5>
       <ul class="side-nav">
       
 
@@ -18,13 +18,11 @@
 {% endif%}
 
       <div class="panel callout radius">
-        <h5>ПЕРВЫЙ РАЗ НА САЙТЕ? </h5>
+          <h5>{% trans "ПЕРВЫЙ РАЗ НА САЙТЕ?" %} </h5>
         <p>
-        singularity.su —  это социальный сайт вопросов и ответов для IT-специалистов: программистов, веб-дизайнеров, системных администраторов. 
-Как stackoverflow.com, только на русском.
-
+        {% trans "singularity.su —  это социальный сайт вопросов и ответов для IT-специалистов: программистов, веб-дизайнеров, системных администраторов. Как stackoverflow.com, только на русском."%}
         </p>
-        <a href="#">Read More →</a>
+        <a href="#">{% trans "Read More →" %}</a>
       </div>
 
     </aside>
