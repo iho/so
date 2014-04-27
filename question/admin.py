@@ -16,7 +16,7 @@ class AdminQuestion(admin.ModelAdmin):
     date_hierarchy = 'created'
     list_display = ['name', 'tags_list', 'owner']
     ordering = ['updated']
-    readonly_fields = ['raiting', 'slug']
+    readonly_fields = ['raiting']
     preserve_filters = True
 
 admin.site.register(Question, AdminQuestion)
