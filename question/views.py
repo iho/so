@@ -28,7 +28,7 @@ from .models import *
 class TagListView(AllPagesMixin, ListView):
     _name_page = 'List of tags'
     model = Tag
-    template_name = 'cbv/list.html'
+    template_name = 'cbv/list-tags.html'
 
 
 class TagDetailView(AllPagesMixin, ListView):
