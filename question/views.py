@@ -145,12 +145,10 @@ class CreateAnswer(AllPagesMixin, AjaxableResponseMixin, LoginRequiredMixin, Cre
     template_name = 'cbv/form_upload.html'
     success_url = '/'
 
-    def get_initial(self):
-        return {'owner':  self.request.user.id}
 
-    # def form_valid(self, form):
-    #     form.instance.owner = self.request.user
-
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super(CreateAnswer, self).form_valid(form)
 
 class UpdateAnswer(PermissionRequiredMixin, OwnerStaffRequiredMixin, UpdateView):
     permission_required = "auth.change_user"
