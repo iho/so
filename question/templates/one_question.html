@@ -5,7 +5,7 @@
         by <a href="{% url "profile" object.owner.pk %}"> {{ object.owner.username }}</a>
         at {{ object.created }}
         {% for tag in   object.tags.all  %} 
-        <a href="{% url "tag" tag.pk %}" >
+        <a href="{% url "tag" tag.slug %}" >
             <span class=" secondary   radius label">{{ tag }}</span>
         </a>
         {% endfor %} 
