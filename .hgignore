@@ -5,4 +5,5 @@ syntax: glob
 prod_static
 media
 .idea
+.git
 CACHE
