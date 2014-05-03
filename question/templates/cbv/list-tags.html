@@ -12,7 +12,7 @@
 {% else %}
 <ul class="circle">
 {% for object in object_list %}
-  <li> <a href="{{ url "cat" object.pk }}"> <b>{{ object.name }}</b> </a> <br></li>
+  <li> <a href="{{ url "cat" object.slug }}"> <b>{{ object.name }}</b> </a> <br></li>
 {% endfor %}
  </ul>
 {% endif %}
