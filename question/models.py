@@ -141,6 +141,7 @@ class Question(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.do_unique_slug(slugify(self.name.strip()))
+            import ipdb; ipdb.set_trace()
 
         super(Question, self).save(*args, **kwargs)
 
@@ -149,8 +150,8 @@ class Question(models.Model):
         counter = 1
 
         while True:
-            question = self.__class__.objects.filter(slug=slug)
-            if not question.exists():
+            import ipdb; ipdb.set_trace()
+            if not self.__class__.objects.filter(slug=slug).exists():
                 self.slug = slug
                 break
 
