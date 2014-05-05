@@ -2,10 +2,12 @@ from django.contrib.syndication import Feed
 from django.core.urlresolvers import reverse
 from .models import Question
 
+
 class LatestEntriesFeed(Feed):
     title = "Police beat site news"
     link = "/sitenews/"
     description = "Updates on changes and additions to police beat central."
+
     def items(self):
         return Question.objects.order_by('-created')[:5]
 

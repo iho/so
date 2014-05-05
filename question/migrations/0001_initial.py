@@ -89,7 +89,7 @@ class Migration(SchemaMigration):
         m2m_table_name = db.shorten_name(u'question_question_voted')
         db.create_table(m2m_table_name, (
             ('id', models.AutoField(verbose_name='ID',
-             primary_key=True, auto_created=True)),
+                                    primary_key=True, auto_created=True)),
             ('question',
              models.ForeignKey(orm[u'question.question'], null=False)),
             ('user', models.ForeignKey(orm[u'question.user'], null=False))
@@ -118,7 +118,7 @@ class Migration(SchemaMigration):
         m2m_table_name = db.shorten_name(u'question_answer_voted')
         db.create_table(m2m_table_name, (
             ('id', models.AutoField(verbose_name='ID',
-             primary_key=True, auto_created=True)),
+                                    primary_key=True, auto_created=True)),
             ('answer', models.ForeignKey(orm[u'question.answer'], null=False)),
             ('user', models.ForeignKey(orm[u'question.user'], null=False))
         ))

@@ -63,9 +63,10 @@ class CatDetailView(AllPagesMixin, ListView):
 
 class MainView(AllPagesMixin, ListView):
     template_name = "main.html"
+
     def get_queryset(self):
         #import ipdb; ipdb.set_trace()
-#  self.request.REQUEST.get('action')
+        #  self.request.REQUEST.get('action')
         return Question.objects.all()
 
 
@@ -145,10 +146,10 @@ class CreateAnswer(AllPagesMixin, AjaxableResponseMixin, LoginRequiredMixin, Cre
     template_name = 'cbv/form_upload.html'
     success_url = '/'
 
-
     def form_valid(self, form):
         form.instance.owner = self.request.user
         return super(CreateAnswer, self).form_valid(form)
+
 
 class UpdateAnswer(PermissionRequiredMixin, OwnerStaffRequiredMixin, UpdateView):
     permission_required = "auth.change_user"

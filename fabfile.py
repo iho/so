@@ -14,10 +14,12 @@ env.shell = "/bin/bash -l -i -c"
 env.key_filename = "/home/ihor/.ssh/id_rsa"
 env.rsync_excludes = ['*.pyc', '*.db', '*~']
 
-@task 
+
+@task
 def make_m():
     with lcd('question'):
         local('django-admin.py makemessages -l ua')
+
 
 @task
 def mail_server():
@@ -145,7 +147,6 @@ source /usr/local/bin/virtualenvwrapper.sh
 """
     require.directory('~/.virtualenvs', owner='web')
     require.file('~/.bashrc', contents=text)
-
 
 
 @task
