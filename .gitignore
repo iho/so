@@ -1,5 +1,6 @@
 *.py[co]
 *.db
+*.mo
 *.sqlite3
 static
 media

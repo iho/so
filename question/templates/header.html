@@ -44,6 +44,8 @@
 
 
         <li><a href="{% provider_login_url "github"  %}">{% trans "Github login" %} </a> </li>
+        <li><a href="{% provider_login_url "google"  %}">{% trans "Google login" %} </a> </li>
+        <li><a href="{% provider_login_url "bitbucket"  %}">{% trans "Bitbucket login" %} </a> </li>
 {% if show_forms and not user.is_authenticated %}
       <li><a href="{% url "account_reset_password" %}">{% trans "Password recovery" %} </a></li>
       <li><a data-reveal-id="modal-login" href="#">{% trans "Login" %}</a></li>

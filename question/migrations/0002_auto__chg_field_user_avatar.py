@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
 from django.db import models
+from south.db import db
+from south.utils import datetime_utils as datetime
+from south.v2 import SchemaMigration
 
 
 class Migration(SchemaMigration):
@@ -10,12 +10,14 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
 
         # Changing field 'User.avatar'
-        db.alter_column(u'question_user', 'avatar', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True))
+        db.alter_column(u'question_user', 'avatar', self.gf(
+            'django.db.models.fields.files.ImageField')(max_length=100, null=True))
 
     def backwards(self, orm):
 
         # Changing field 'User.avatar'
-        db.alter_column(u'question_user', 'avatar', self.gf('django.db.models.fields.files.ImageField')(default='', max_length=100))
+        db.alter_column(u'question_user', 'avatar', self.gf(
+            'django.db.models.fields.files.ImageField')(default='', max_length=100))
 
     models = {
         u'question.answer': {
