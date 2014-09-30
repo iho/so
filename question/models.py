@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 import hashlib
+from future_builtins import ascii, filter, hex, map, oct, zip
 
 from django.contrib.auth.models import AbstractBaseUser
 from django.core.urlresolvers import reverse
@@ -12,7 +13,6 @@ from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
-from future_builtins import ascii, filter, hex, map, oct, zip
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from managers import MyUserManager
@@ -35,7 +35,7 @@ class Category(models.Model):
 
 
 class User(AbstractBaseUser):
-    avatar = models.ImageField(upload_to='avatars')
+    avatar = models.ImageField(upload_to='avatars', blank=True, null=True)
    # avatar_thumbnail = ImageSpecField(source='avatar', processors=[ResizeToFill(200, 200)], format='JPEG', options={'quality': 60})
     use_avatar = models.BooleanField(default=True)
     username = models.CharField(
@@ -71,7 +71,7 @@ class User(AbstractBaseUser):
         self.email = self.email.lower()
 
     def __unicode__(self):
-        return _("{}'s ").format(self.username)
+        return _("{}'s ").format(self.email)
 
     def views(self):
         raise NotImplementedError()

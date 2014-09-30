@@ -2,13 +2,13 @@
 # coding: utf-8
 from __future__ import division, print_function, unicode_literals
 
+from future_builtins import ascii, filter, hex, map, oct, zip
+
 from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import redirect
 from django.utils.cache import patch_response_headers
 from django.views.decorators.cache import cache_page, never_cache
-
-from future_builtins import ascii, filter, hex, map, oct, zip
 
 from .models import Category
 

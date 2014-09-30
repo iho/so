@@ -2,10 +2,11 @@
 # coding: utf-8
 from __future__ import print_function, unicode_literals
 
-from fabric.api import cd, env, local, run, sudo, task, lcd
+from fabric.api import cd, env, lcd, local, run, sudo, task
 from fabric.colors import green, red
 from fabric.contrib.project import rsync_project
 from fabric.operations import prompt
+
 from fabtools import require
 
 env.use_ssh_config = True
